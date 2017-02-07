@@ -22,8 +22,11 @@ class Router {
     }
 
     public function dispatch($resource_route, $request) {
-      $route = $this->RouteContainer->get($resource_route, $request->get_method());
-
+      $route = $this->RouteContainer->get($resource_route, $request->getMethod());
+      if (!$route) {
+        throw new InvalidRouteException();
+      }
+      
       // check if the supplied callback is a lambda function or a string identifying a controller
       if (!is_string($route->getTarget())) {
         // could have used the following line but call_user_func is clearer$var = $route->getTarget();$var($request);
@@ -34,7 +37,7 @@ class Router {
       // route the request to the correct controller
       $target = explode('@', $route->getTarget());
       if (count($target) != 2) {
-        //throw error
+        throw new InvalidArgumentException('The target of the Route object must be a lambda function or a string defined as method@namespace\\class');
       }
       
       $method_name = $target[0];
@@ -42,7 +45,7 @@ class Router {
 
       // check controller exists, else command is invalid
       if (!class_exists($controller_name)) {
-          die('class not found');
+          throw new InvalidControllerException();
       }
 
       // initalise the controller class
@@ -50,7 +53,8 @@ class Router {
 
       // ensure the method corresponding to the action exists, allowing a graceful fail otherwise 
       if (!method_exists($controller, $method_name)) {
-         die('METHOD not found');
+        // SPL Exception
+        throw new BadFunctionCallException('Controller method not found');
       }
 
       // call method on controller object
