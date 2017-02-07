@@ -1,5 +1,5 @@
 <?php
-namespace DavidFricker\Router;
+namespace DavidFricker\Router\Capsule;
 
 /**
   * A wrapper around a DB driver to expose a uniform interface

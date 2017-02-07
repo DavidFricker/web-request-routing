@@ -1,7 +1,7 @@
 <?php
 namespace DavidFricker\Router;
 
-use DavidFricker\Router\RouteContainer;
+use DavidFricker\Router\Capsule\RouteContainer;
 
 /**
   * A wrapper around a DB driver to expose a uniform interface

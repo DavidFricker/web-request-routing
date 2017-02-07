@@ -1,7 +1,7 @@
 <?php
-namespace DavidFricker\Router;
+namespace DavidFricker\Router\Exception;
 
-use DavidFricker\Router\Exceptions;
+use \Exception;
 
 /**
   * A wrapper around a DB driver to expose a uniform interface
