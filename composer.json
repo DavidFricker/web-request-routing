@@ -9,6 +9,5 @@
         "psr-4": {
             "davidfricker\\router\\": "src"
         }
-    },
-    "version": "1.0.0" 
+    }
 }
