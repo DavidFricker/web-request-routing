@@ -43,6 +43,10 @@ final class RouteContainer
     }
 
     public function get($resource_route, $http_method) {
+      if (!isset($this->getContainerForMethod($http_method)[$resource_route])) {
+        return false;
+      }
+
       return $this->getContainerForMethod($http_method)[$resource_route];
     }
 
@@ -65,7 +69,7 @@ final class RouteContainer
             break;
 
           default:
-            // throw error
+            throw new InvalidHTTPMethodException('This HTTP method is not supported');
             break;
       }
     }
