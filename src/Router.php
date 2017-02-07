@@ -24,7 +24,7 @@ class Router {
     public function dispatch($resource_route, $request) {
       $route = $this->RouteContainer->get($resource_route, $request->getMethod());
       if (!$route) {
-        throw new InvalidRouteException();
+        throw new InvalidRouteException('Route not recognised');
       }
       
       // check if the supplied callback is a lambda function or a string identifying a controller
@@ -45,7 +45,7 @@ class Router {
 
       // check controller exists, else command is invalid
       if (!class_exists($controller_name)) {
-          throw new InvalidControllerException();
+          throw new InvalidControllerException('Controller not found');
       }
 
       // initalise the controller class
