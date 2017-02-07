@@ -1,6 +1,8 @@
 <?php
 namespace DavidFricker\Router;
 
+use DavidFricker\Router\BaseRouteController;
+
 /**
   * A wrapper around a DB driver to expose a uniform interface
   *
@@ -12,7 +14,7 @@ namespace DavidFricker\Router;
   *
   * @return void
   */
-class AuthRouteController {
+class AuthRouteController extends BaseRouteController {
     public function __construct() {
        
     }
