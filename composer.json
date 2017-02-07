@@ -1,0 +1,13 @@
+{
+    "name":"davidfricker/router",
+    "description":"Lightweight PHP OOP web request routing system",
+    "license": "MIT",
+    "require":{
+        "php":"^5.3.3 || ^7.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "davidfricker\\router\\": "src"
+        }
+    }
+}
