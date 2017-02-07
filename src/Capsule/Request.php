@@ -42,6 +42,7 @@ class Request {
                 break;
 
             default:
+                throw new InvalidHTTPMethodException('HTTP method not supported');
                 break;
         }
     }

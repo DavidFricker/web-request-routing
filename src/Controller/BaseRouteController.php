@@ -1,7 +1,7 @@
 <?php
 namespace DavidFricker\Router\Controller;
 
-use DavidFricker\DataAbstracter\Capsule\ContentProvider;
+use DavidFricker\DataAbstracter\Provider\AppContentProvider;
 
 /**
   * A wrapper around a DB driver to expose a uniform interface
@@ -14,14 +14,14 @@ use DavidFricker\DataAbstracter\Capsule\ContentProvider;
   *
   * @return void
   */
-class AbstractRouteController {
-    $content_provider;
+class BaseRouteController {
+    protected $content_provider;
 
     public function __construct() {
-       $this->content_provider = ContentProvider::init();
+       $this->content_provider = AppContentProvider::init();
     }
 
     public function authCheck() {
-    
+      
     }
 }

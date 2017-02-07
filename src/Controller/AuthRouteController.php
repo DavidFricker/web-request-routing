@@ -21,6 +21,6 @@ class AuthRouteController extends BaseRouteController {
 
     public function getLogoutPage($request) {
       echo 'logout page';
-      var_dump($request);
+      var_dump($request, $this->content_provider);
     }
 }
