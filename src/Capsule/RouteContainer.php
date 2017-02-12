@@ -22,6 +22,7 @@ final class RouteContainer
     private $routes_post = [];
     private $routes_delete = [];
     private $routes_put = [];
+    private $parsed_url_parameters = [];
 
     const HTTP_METHOD_GET = 'GET';
     const HTTP_METHOD_POST = 'POST';
@@ -39,15 +40,50 @@ final class RouteContainer
     }
 
     public function set($resource_route, $http_method, $callback) {
-      $this->getContainerForMethod($http_method)[$resource_route] = new Route($resource_route, $http_method, $callback);
+      $this->getContainerForMethod($http_method)[trim($resource_route,'/')] = new Route(trim($resource_route,'/'), $http_method, $callback);
     }
 
     public function get($resource_route, $http_method) {
-      if (!isset($this->getContainerForMethod($http_method)[$resource_route])) {
-        return false;
+      // deal with trailing slashes
+      $resource_route = trim($resource_route,'/');
+
+      # check for a static resource match
+      if (isset($this->getContainerForMethod($http_method)[$resource_route])) {
+        return $this->getContainerForMethod($http_method)[$resource_route];
       }
 
-      return $this->getContainerForMethod($http_method)[$resource_route];
+      # check for a dynamic resource match
+      $url_parts = explode('/', strtolower($resource_route));
+
+      foreach($this->getContainerForMethod($http_method) as $route_as_index => $route_object) {
+          $resource_parts = explode('/', $route_as_index);
+          
+          if (count($resource_parts) != count($url_parts)) {
+              continue;
+          }
+
+          for ($i=0; $i < count($resource_parts); $i++) {
+              if ($resource_parts[$i] != $url_parts[$i]) {
+                  // treating the string as an array skips a method call to stristr, woo!
+                  if($resource_parts[$i][0] != '{') {
+                      // not a dynamic match
+                      $this->parsed_url_parameters = [];
+                      continue 2;
+                  }
+
+                  
+                  $this->parsed_url_parameters[trim($resource_parts[$i],'{}')] = $url_parts[$i];
+              }
+          }
+
+          return $route_object;
+      }
+
+      return false;
+    }
+
+    public function getParsedUrlParameters () {
+      return $this->parsed_url_parameters;
     }
 
     private function &getContainerForMethod($http_method) {
