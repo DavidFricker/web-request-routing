@@ -17,6 +17,7 @@ namespace DavidFricker\Router\Capsule;
 class Request {
     // url parts stored in an array e.g. example.com/path/to/resource becomes ['path','to','resource']
     private $url_elements;
+    private $parsed_url_elements;
     private $request_parameters;
     private $http_method;
     
@@ -24,7 +25,7 @@ class Request {
         $this->method = $_SERVER['REQUEST_METHOD'];
 
         if (isset($_SERVER['PATH_INFO'])) {
-            $this->url_elements = explode(DIRECTORY_SEPARATOR, trim($_SERVER['PATH_INFO'], DIRECTORY_SEPARATOR));
+            $this->url_elements = explode('/', trim($_SERVER['PATH_INFO'], '/'));
         }
         
         switch($this->getMethod()) {
@@ -73,5 +74,21 @@ class Request {
         }
 
         return false;
+    }
+
+    public function setParsedUrlParameters($parsed_url_elements) {
+        $this->parsed_url_elements = $parsed_url_elements;
+    }
+
+    public function getParsedUrlParameter($index = '') {
+        if ($index == '') {
+            return $this->parsed_url_elements;
+        }
+        
+        if (count($this->url_elements) > $index) {
+            return $this->parsed_url_elements[$index];
+        }
+
+        return false; 
     }
 }
