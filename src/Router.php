@@ -23,16 +23,16 @@ class Router {
        $this->RouteContainer = RouteContainer::init();
     }
 
-    public function dispatch($resource_route, $request) {
-      $route = $this->RouteContainer->get($resource_route, $request->getMethod());
+    public function dispatch($resource_route, $Request) {
+      $route = $this->RouteContainer->get($resource_route, $Request->getMethod());
       if (!$route) {
         throw new InvalidRouteException('Route not recognised');
       }
       
       // check if the supplied callback is a lambda function or a string identifying a controller
       if (!is_string($route->getTarget())) {
-        // could have used the following line but call_user_func is clearer$var = $route->getTarget();$var($request);
-        call_user_func($route->getTarget(), $request);
+        // could have used the following line but call_user_func is clearer$var = $route->getTarget();$var($Request);
+        call_user_func($route->getTarget(), $Request);
         return;
       }
 
@@ -59,7 +59,9 @@ class Router {
         throw new \BadFunctionCallException('Controller method not found');
       }
 
+      $Request->setParsedUrlParameters($this->RouteContainer->getParsedUrlParameters());
+
       // call method on controller object
-      call_user_func(array($controller, $method_name), $request);
+      call_user_func(array($controller, $method_name), $Request);
     }
 }
