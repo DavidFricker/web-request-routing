@@ -15,12 +15,15 @@ use DavidFricker\Router\Controller\BaseRouteController;
   * @return void
   */
 class AuthRouteController extends BaseRouteController {
-    public function __construct() {
-       
-    }
-
     public function getLogoutPage($request) {
       echo 'logout page';
       var_dump($request, $this->content_provider);
     }
+
+    public function getLogoutPageWithID($request) {
+      echo 'getLogoutPageWithID';
+      var_dump($request);
+    }
+
+    
 }
