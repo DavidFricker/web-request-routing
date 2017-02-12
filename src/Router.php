@@ -2,6 +2,8 @@
 namespace DavidFricker\Router;
 
 use DavidFricker\Router\Capsule\RouteContainer;
+use DavidFricker\Router\Exception\InvalidRouteException;
+use DavidFricker\Router\Exception\InvalidControllerException;
 
 /**
   * A wrapper around a DB driver to expose a uniform interface
@@ -37,7 +39,7 @@ class Router {
       // route the request to the correct controller
       $target = explode('@', $route->getTarget());
       if (count($target) != 2) {
-        throw new InvalidArgumentException('The target of the Route object must be a lambda function or a string defined as method@namespace\\class');
+        throw new \InvalidArgumentException('The target of the Route object must be a lambda function or a string defined as method@namespace\\class');
       }
       
       $method_name = $target[0];
@@ -54,7 +56,7 @@ class Router {
       // ensure the method corresponding to the action exists, allowing a graceful fail otherwise 
       if (!method_exists($controller, $method_name)) {
         // SPL Exception
-        throw new BadFunctionCallException('Controller method not found');
+        throw new \BadFunctionCallException('Controller method not found');
       }
 
       // call method on controller object
