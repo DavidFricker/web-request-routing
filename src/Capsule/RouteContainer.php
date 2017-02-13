@@ -63,7 +63,7 @@ final class RouteContainer
           }
 
           for ($i=0; $i < count($resource_parts); $i++) {
-              if ($resource_parts[$i] != $url_parts[$i]) {
+              if ($resource_parts[$i] == '' || $resource_parts[$i] != $url_parts[$i]) {
                   // treating the string as an array skips a method call to stristr, woo!
                   if($resource_parts[$i][0] != '{') {
                       // not a dynamic match
