@@ -81,7 +81,7 @@ class Request {
         $this->parsed_url_elements = $parsed_url_elements;
     }
 
-    public function getParsedUrlParameter($index = '') {
+    public function getParsedUrlParameters($index = '') {
         if ($index == '') {
             return $this->parsed_url_elements;
         }
