@@ -86,7 +86,7 @@ class Request {
             return $this->parsed_url_elements;
         }
         
-        if (count($this->url_elements) > $index) {
+        if (isset($this->parsed_url_elements[$index])) {
             return $this->parsed_url_elements[$index];
         }
 
