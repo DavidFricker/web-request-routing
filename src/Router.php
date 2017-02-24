@@ -17,6 +17,7 @@ use DavidFricker\Router\Exception\InvalidControllerException;
   *
   * @return void
   */
+ // add middleware?
 class Router {
     private $RouteContainer;
 
