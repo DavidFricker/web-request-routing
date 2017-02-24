@@ -1,4 +1,5 @@
 <?php
+
 namespace DavidFricker\Router\Capsule;
 
 /**

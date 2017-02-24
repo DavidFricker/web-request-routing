@@ -1,4 +1,5 @@
 <?php
+
 namespace DavidFricker\Router;
 
 use DavidFricker\Router\Capsule\RouteContainer;
