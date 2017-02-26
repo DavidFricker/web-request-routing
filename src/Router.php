@@ -31,8 +31,8 @@ class Router {
         throw new InvalidRouteException('Route not recognised');
       }
       
-      // check if the supplied callback is a lambda function or a string identifying a controller
-      if (!is_string($route->getTarget())) {
+      // check if the supplied callback is a annonymous function or a string identifying a controller
+      if (is_callable($route->getTarget())) {
         // could have used the following line but call_user_func is clearer$var = $route->getTarget();$var($Request);
         call_user_func($route->getTarget(), $Request);
         return;
