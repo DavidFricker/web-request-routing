@@ -1,8 +1,7 @@
 <?php
 
 require_once __DIR__ . DIRECTORY_SEPARATOR . join(DIRECTORY_SEPARATOR, array('..','app','vendor','autoload.php'));
-require_once __DIR__ . DIRECTORY_SEPARATOR . join(DIRECTORY_SEPARATOR, array('..','app','overphish','const.php'));
-require_once __DIR__ . DIRECTORY_SEPARATOR . join(DIRECTORY_SEPARATOR, array('..','app','overphish','routes.php'));
+require_once __DIR__ . DIRECTORY_SEPARATOR . join(DIRECTORY_SEPARATOR, array('..','routes.php'));
 
 use DavidFricker\Router\Router;
 use DavidFricker\Router\Capsule\Request;
