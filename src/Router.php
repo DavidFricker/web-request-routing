@@ -41,7 +41,7 @@ class Router {
       // route the request to the correct controller
       $target = explode('@', $route->getTarget());
       if (count($target) != 2) {
-        throw new \InvalidArgumentException('The target of the Route object must be a lambda function or a string defined as method@namespace\\class');
+        throw new InvalidControllerException('The target of the Route object must be a lambda function or a string defined as method@namespace\\class');
       }
       
       $method_name = $target[0];
