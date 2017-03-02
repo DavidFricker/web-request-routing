@@ -17,7 +17,6 @@ use DavidFricker\Router\Exception\InvalidControllerException;
   *
   * @return void
   */
- // add middleware?
 class Router {
     private $RouteContainer;
 
@@ -33,7 +32,7 @@ class Router {
       
       // check if the supplied callback is a annonymous function or a string identifying a controller
       if (is_callable($route->getTarget())) {
-        // could have used the following line but call_user_func is clearer$var = $route->getTarget();$var($Request);
+        // could have used the following line but call_user_func is clearer than $var = $route->getTarget();$var($Request);
         call_user_func($route->getTarget(), $Request);
         return;
       }
