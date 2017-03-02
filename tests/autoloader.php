@@ -14,7 +14,7 @@
 // autoloader template from: http://www.php-fig.org/psr/psr-4/examples/
 spl_autoload_register(function ($class) {
     // project-specific namespace prefix
-    $prefix = 'DavidFricker\\DataAbstracter\\';
+    $prefix = 'DavidFricker\\Router\\';
 
     // base directory for the namespace prefix
     $base_dir = '../src/';
@@ -40,10 +40,10 @@ spl_autoload_register(function ($class) {
     }
 });
 
-
+/*
 spl_autoload_register(function ($class) {
     // project-specific namespace prefix
-    $prefix = 'DavidFricker\\DataAbstracter\\Example\\';
+    $prefix = 'DavidFricker\\Router\\Example\\';
 
     // base directory for the namespace prefix
     $base_dir = '../example/';
@@ -68,3 +68,4 @@ spl_autoload_register(function ($class) {
         require $file;
     }
 });
+*/
