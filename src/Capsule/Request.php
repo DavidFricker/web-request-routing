@@ -3,18 +3,10 @@
 namespace DavidFricker\Router\Capsule;
 
 /**
-  * A wrapper around a DB driver to expose a uniform interface
+  * A representation of a HTTP request
   *
-  * Bassically an abstraction over the complexity of the PDO class, but by design this could wrap any strctured storage mechanism 
-  * A database engine adapter
-  *
-  * @param string $myArgument With a *description* of this argument, these may also
-  *    span multiple lines.
-  *
-  * @return void
-  *
- *
- */
+  * Stores and allows easy access to common important variables of a HTTP request.
+  */
 class Request {
     // url parts stored in an array e.g. example.com/path/to/resource becomes ['path','to','resource']
     private $url_elements;
@@ -22,6 +14,9 @@ class Request {
     private $request_parameters;
     private $http_method;
     
+    /**
+     * Gathers HTTP request information
+     */
     public function __construct() {
         $this->method = $_SERVER['REQUEST_METHOD'];
 
@@ -44,15 +39,28 @@ class Request {
                 break;
 
             default:
-                throw new InvalidHTTPMethodException('HTTP method not supported');
                 break;
         }
     }
 
+    /**
+     * Getter method for the HTTP request method
+     * 
+     * @return string HTTP request method 
+     */
     public function getMethod() {
         return $this->method;
     }
 
+    /**
+     * Fetch parts of the URL/path
+     *
+     * Indexed from zero. The path elements are split around '/'.
+     * @example path /path/to/page, getUrlElements(1) would return the string 'to'
+     * 
+     * @param  integer $index index of the array of path elements 
+     * @return string         path element
+     */
     public function getUrlElements($index=-1) {
         if ($index == -1) {
             return $this->url_elements;
@@ -65,6 +73,14 @@ class Request {
         return false;        
     }
 
+    /**
+     * Fetch parameters sent with the request
+     *
+     * Acts similarly to the $_REQUEST array.
+     * 
+     * @param  string $index name of the variable you would like the value for
+     * @return string        value found at the indexed location, or false
+     */
     public function getParameters($index = '') {
         if ($index == '') {
             return $this->parameters;
@@ -77,9 +93,29 @@ class Request {
         return false;
     }
 
+    /**
+     * Set array of parsed URL elements
+     *
+     * Used by the Router class, stores the result of parsing the request path from the client using the template route path.
+     *
+     * @example if the template route path were 'path/to/article/{article_id}', the actual route path were 'path/to/article/4455', then the array [article_id => 4455] would be passed to this method
+     * 
+     * @param array $parsed_url_elements an associative array of path elements and parsed values
+     */
     public function setParsedUrlParameters($parsed_url_elements) {
         $this->parsed_url_elements = $parsed_url_elements;
     }
+
+    /**
+     * Fetch parsed elements of the request path
+     *
+     * Returns values from the array set by the Router class using the setParsedUrlParameters() method.
+     *
+     * @example if the template route path were 'path/to/article/{article_id}', the actual route path were 'path/to/article/4455', then the array [article_id => 4455] would be passed to this method
+     * 
+     * @param  string $index path element, such as 'article_id' in the @example
+     * @return string        value found at the indexed location, or false
+     */
 
     public function getParsedUrlParameters($index = '') {
         if ($index == '') {
