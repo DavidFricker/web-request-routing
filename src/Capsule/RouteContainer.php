@@ -75,7 +75,7 @@ final class RouteContainer
       }
 
       # check for a dynamic resource match
-      $url_parts = explode('/', strtolower($resource_route));
+      $url_parts = explode('/', $resource_route);
 
       foreach($this->getContainerForMethod($http_method) as $route_as_index => $route_object) {
           $resource_parts = explode('/', $route_as_index);
