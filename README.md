@@ -16,21 +16,23 @@ $RouteContainer = DavidFricker\Router\Capsule\RouteContainer::init();
 
 ### Create a static route
 The following line will create a static route. Static routes are those without any dynamic components that require parsing. 
-The first arugment is the URI the client should naviagate to. The second arugment is the HTTP method they should request the URI with. The third argument can be an anonymus function or a string that identifies a method of a given class.
+The first argument is the URI the client should navigate to. The second argument is the HTTP method they should use to request the. The third argument can be an anonymous function or a string that identifies a method of a given class.
 
 #### Directing to a class member
 ```PHP
+// the method, in this instance `getPage`, should accept a $Request object as its single parameter
 $RouteContainer->set('/dashboard', RouteContainer::HTTP_METHOD_GET, 'getPage@Namespace\Vendor\Package\Controller\Dashboard');
 ```
-#### Directing to an annonymus function
+
+#### Directing to an anonymous function
 ```PHP
 $RouteContainer->set('/dashboard', RouteContainer::HTTP_METHOD_GET, function($Request){
   echo 'Welcome to your dashboard';
 });
 ```
 
-### Create a dynamic route for an anonymous function
-Dynamic routes are defined in the same fashion as thier static counterparts. However in the defined route any parts that are sourned by curely braces will be parsed and passed to the called function through the request object. An example of format and usage can be seen below. 
+### Create a dynamic route
+Dynamic routes are defined in the same fashion as their static counterparts. However, in the defined route any parts that are surrounded by curly braces will be parsed and passed to the called function through the `Request` object. An example of format and usage can be seen below. 
 
 ```PHP
 $RouteContainer->set('/confirm/{token}/complete', RouteContainer::HTTP_METHOD_GET, function($Request){
@@ -40,4 +42,3 @@ $RouteContainer->set('/confirm/{token}/complete', RouteContainer::HTTP_METHOD_GE
 
 ## License
 Released under the MIT license.
-
