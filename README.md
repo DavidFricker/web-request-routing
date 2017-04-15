@@ -1,5 +1,5 @@
 # Web request routing
-Lightweight PHP OOP web request routing system 
+A standalone lightweight web request routing system. 
 
 ## Install
 Using composer
