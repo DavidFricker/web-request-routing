@@ -40,14 +40,14 @@ $RouteContainer->set('/confirm/{token}/complete', RouteContainer::HTTP_METHOD_GE
 });
 ```
 
-## Request refernce
+## Request class reference
 
 #### getMethod
 Getter method for the HTTP request method
 returns `string` HTTP request method 
 
 #### getUrlElements
-Fetch a single part of the path or all in the form of an array. To fetch all parts in an array supply no arguments. To fetch a single part supply the numeric index of the expected possition of the part starting from zero. The path elements are split around '/'.
+Fetch a single part of the path or all in the form of an array. To fetch all parts in an array supply no arguments. To fetch a single part supply the numeric index of the expected position of the part starting from zero. The path elements are split around '/'.
 
 For example, the `Request` object for the URI `/path/to/page` would return the string 'to' when calling `getUrlElements(1)`.
 
@@ -57,7 +57,10 @@ To fetch all parameters in an array supply no arguments. To fetch a single value
 
 #### getParsedUrlParameters
 Fetch parsed elements of the request path. Returns the parsed value from the request URI using the request route.
-For example, if the template route path were 'path/to/article/{article_id}', the requested URI were 'path/to/article/4455', then the array [article_id => 4455] would be passed to this method. This would then be acceisble by the following method call `getParsedUrlParameters('article_id')`
+For example, if the template route path were 'path/to/article/{article_id}', the requested URI were 'path/to/article/4455', then the array [article_id => 4455] would be passed to this method. This would then be accessible by the following method call `getParsedUrlParameters('article_id')`
+
+## Bugs
+Bug reports welcome, please included details to reproduce the bugs. Commits are also very welcome for bug fixes, features, or refactoring. 
 
 ## License
 Released under the MIT license.
