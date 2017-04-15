@@ -2,9 +2,10 @@
 A standalone lightweight web request routing system. 
 
 ## Install
-Using composer
-
+### Using composer
 `composer require DavidFricker/Router`
+### Non composer
+This package is PSR-4 compliant so creating your own autoloader should easy if you do not wish to use composer. 
 
 ## Usage example 
 Before any requests can be routed they must be defined and stored within a RouteContainer object.
