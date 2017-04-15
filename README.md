@@ -40,5 +40,24 @@ $RouteContainer->set('/confirm/{token}/complete', RouteContainer::HTTP_METHOD_GE
 });
 ```
 
+## Request refernce
+
+#### getMethod
+Getter method for the HTTP request method
+returns `string` HTTP request method 
+
+#### getUrlElements
+Fetch a single part of the path or all in the form of an array. To fetch all parts in an array supply no arguments. To fetch a single part supply the numeric index of the expected possition of the part starting from zero. The path elements are split around '/'.
+
+For example, the `Request` object for the URI `/path/to/page` would return the string 'to' when calling `getUrlElements(1)`.
+
+#### getParameters
+Fetch parameters sent with the request. This method acts similarly to the $_REQUEST array. 
+To fetch all parameters in an array supply no arguments. To fetch a single value supply the parameter key (in the same way you would fetch a value from the $_POST or $_GET arrays).
+
+#### getParsedUrlParameters
+Fetch parsed elements of the request path. Returns the parsed value from the request URI using the request route.
+For example, if the template route path were 'path/to/article/{article_id}', the requested URI were 'path/to/article/4455', then the array [article_id => 4455] would be passed to this method. This would then be acceisble by the following method call `getParsedUrlParameters('article_id')`
+
 ## License
 Released under the MIT license.
