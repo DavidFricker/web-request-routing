@@ -16,7 +16,7 @@ $RouteContainer = DavidFricker\Router\Capsule\RouteContainer::init();
 
 ### Create a static route
 The following line will create a static route. Static routes are those without any dynamic components that require parsing. 
-The first parameter is the URI the client should naviagate to. The second arugment is the HTTP method they should request the URI with. The third argument can be an anonymus function or a string that identifies a method of a given class.
+The first arugment is the URI the client should naviagate to. The second arugment is the HTTP method they should request the URI with. The third argument can be an anonymus function or a string that identifies a method of a given class.
 
 #### Directing to a class member
 ```PHP
