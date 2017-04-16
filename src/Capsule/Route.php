@@ -3,24 +3,26 @@
 namespace DavidFricker\Router\Capsule;
 
 /**
-  * A wrapper around a DB driver to expose a uniform interface
-  *
-  * Bassically an abstraction over the complexity of the PDO class, but by design this could wrap any strctured storage mechanism 
-  * A database engine adapter
-  *
-  * @param string $myArgument With a *description* of this argument, these may also
-  *    span multiple lines.
-  *
-  * @return void
+  * Representation of a request route e.g. /dashboard or /home
   */
 class Route {
-    // url e.g. example.com/login -> login
+    /**
+     * If the request were to 'example.com/login', this member should contain 'login'
+     * @var string
+     */
     private $resource_route;
     
-    // method@class or lambda func - method@namespace\class for namespaced classes
+    /**
+     * String: representation of method, namespace, and class e.g. 'method@namespace\class'
+     * Function: an anonymous function that accepts a Request object as a parameter
+     * @var mixed
+     */
     private $target;
     
-    // http method
+    /**
+     * HTTP method
+     * @var string
+     */
     private $http_method;
     
     public function __construct($resource_route, $http_method, $target)
@@ -30,14 +32,29 @@ class Route {
         $this->target  = $target;
     }
 
+    /**
+     * Fetch the target of the route
+     * 
+     * @return mixed The target can be a string identifying a method and class or it can be an anonymous function
+     */
     public function getTarget() {
       return $this->target;
     }
 
+    /**
+     * Fetch the method the route is declared to handle
+     * 
+     * @return string standard HTTP verbiage
+     */
     public function getMethod() {
       return $this->method;
     }
 
+    /**
+     * Fetch the route
+     * 
+     * @return string route, as requested by client e.g. /dashboard/load
+     */
     public function getResourceRoute() {
       return $this->resource_route;
     }

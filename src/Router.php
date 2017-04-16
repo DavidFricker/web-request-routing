@@ -7,23 +7,29 @@ use DavidFricker\Router\Exception\InvalidRouteException;
 use DavidFricker\Router\Exception\InvalidControllerException;
 
 /**
-  * A wrapper around a DB driver to expose a uniform interface
-  *
-  * Bassically an abstraction over the complexity of the PDO class, but by design this could wrap any strctured storage mechanism 
-  * A database engine adapter
-  *
-  * @param string $myArgument With a *description* of this argument, these may also
-  *    span multiple lines.
-  *
-  * @return void
-  */
+ * Automatic request routing class
+ */
 class Router {
+    /**
+     * Contains the instance of the RouteContainer class (singleton)
+     * @var RouteContainer
+     */
     private $RouteContainer;
 
     public function __construct() {
        $this->RouteContainer = RouteContainer::init();
     }
 
+    /**
+     * Serves a HTTP request.
+     *
+     * @throws InvalidRouteException
+     * @throws InvalidControllerException
+     * 
+     * @param  string $resource_route The query URI
+     * @param  Request $Request        Instance of the Request object
+     * @return void
+     */
     public function dispatch($resource_route, $Request) {
       $route = $this->RouteContainer->get($resource_route, $Request->getMethod());
       if (!$route) {

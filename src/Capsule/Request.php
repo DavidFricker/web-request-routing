@@ -8,10 +8,28 @@ namespace DavidFricker\Router\Capsule;
   * Stores and allows easy access to common important variables of a HTTP request.
   */
 class Request {
-    // url parts stored in an array e.g. example.com/path/to/resource becomes ['path','to','resource']
+    /**
+     * url parts stored in an array e.g. example.com/path/to/resource becomes ['path','to','resource']
+     * @var array
+     */
     private $url_elements;
+
+    /**
+     * Parsed parts of the dynamic routes
+     * @var array
+     */
     private $parsed_url_elements;
+
+    /**
+     * Prased input from $_POST, $_GET, or php://input
+     * @var array
+     */
     private $request_parameters;
+
+    /**
+     * HTTP Request method
+     * @var string
+     */
     private $http_method;
     
     /**
@@ -113,10 +131,9 @@ class Request {
      *
      * @example if the template route path were 'path/to/article/{article_id}', the actual route path were 'path/to/article/4455', then the array [article_id => 4455] would be passed to this method
      * 
-     * @param  string $index path element, such as 'article_id' in the @example
+     * @param  string $index path element, such as 'article_id' in the example
      * @return string        value found at the indexed location, or false
      */
-
     public function getParsedUrlParameters($index = '') {
         if ($index == '') {
             return $this->parsed_url_elements;
